@@ -1,0 +1,4 @@
+imu_topic: "/IMU_data"
+imu_rate: 100
+measure_rate: 100
+sequence_time: 51223 # 1 hour in seconds

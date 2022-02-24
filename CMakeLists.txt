@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(allan_variance_ros)
 
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 set(CATKIN_PACKAGE_DEPENDENCIES
     geometry_msgs
     sensor_msgs

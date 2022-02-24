@@ -11,6 +11,10 @@
 #include "allan_variance_ros/ImuMeasurement.hpp"
 #include "allan_variance_ros/yaml_parsers.hpp"
 
+#include <fstream>
+#include <iomanip>
+
+
 namespace allan_variance_ros {
 
 template <class T>

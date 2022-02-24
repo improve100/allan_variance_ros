@@ -1,5 +1,6 @@
 
 #include "allan_variance_ros/AllanVarianceComputor.hpp"
+#include <boost/foreach.hpp>
 
 namespace allan_variance_ros {
 
@@ -70,8 +71,18 @@ void AllanVarianceComputor::run(std::string bag_path) {
 
         ImuMeasurement input;
         input.t = imu_msg->header.stamp.toNSec();
-        input.I_a_WI = Eigen::Vector3d(imu_msg->linear_acceleration.x, imu_msg->linear_acceleration.y,
-                                       imu_msg->linear_acceleration.z);
+        if(imu_msg->linear_acceleration.z > 0.7 && imu_msg->linear_acceleration.z < 1.2)
+        {
+          double kG = 9.81007;
+          input.I_a_WI = Eigen::Vector3d(imu_msg->linear_acceleration.x*kG, imu_msg->linear_acceleration.y*kG,
+                                         imu_msg->linear_acceleration.z*kG);
+        }
+        else
+        {
+          input.I_a_WI = Eigen::Vector3d(imu_msg->linear_acceleration.x, imu_msg->linear_acceleration.y,
+                                         imu_msg->linear_acceleration.z);
+        }
+
         input.I_w_WI =
             Eigen::Vector3d(imu_msg->angular_velocity.x, imu_msg->angular_velocity.y, imu_msg->angular_velocity.z);
 
